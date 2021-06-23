@@ -1,8 +1,15 @@
 "use strict";
 
-import { app, protocol, BrowserWindow } from "electron";
+import {
+  app,
+  protocol,
+  BrowserWindow,
+  ipcMain,
+  Notification,
+  webContents,
+} from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
-import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
+// import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
@@ -77,3 +84,16 @@ if (isDevelopment) {
     });
   }
 }
+
+ipcMain.handle("hello", () => {
+  const notification = new Notification({
+    title: "hello electron!!",
+  });
+  notification.show();
+
+  notification.on("click", () => {
+    const contents = win.webContents;
+    console.log(contents);
+    contents.send("hello-click");
+  });
+});
