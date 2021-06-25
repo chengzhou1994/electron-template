@@ -7,22 +7,22 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-import { ipcRenderer } from "electron";
+import HelloWorld from '@/components/HelloWorld.vue'
+import { ipcRenderer } from 'electron'
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     HelloWorld,
   },
   methods: {
     openDialog() {
-      ipcRenderer.invoke("hello");
+      ipcRenderer.invoke('hello')
     },
     created() {
-      ipcRenderer.on("hello-click", () => {
-        console.log("jeeee!!!!");
-      });
+      ipcRenderer.on('hello-click', () => {
+        console.log('jeeee!!!!')
+      })
     },
   },
-};
+}
 </script>
